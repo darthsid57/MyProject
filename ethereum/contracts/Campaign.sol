@@ -1,4 +1,4 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.4.24;
 
 contract CampaignFactory {
   address[] public deployedCampaigns;
@@ -40,7 +40,7 @@ contract Campaign {
   }
 
  //constructor
-  function Campaign(uint minimum, address creater) public {
+  constructor (uint minimum, address creater) public {
     manager = creater;
     minimumContribution = minimum;
   }
@@ -60,7 +60,7 @@ contract Campaign {
         value: value,
         recipient: recipient,
         complete: false,
-        approvalCount:
+        approvalCount: 0
     });
 
     requests.push(newRequest);
@@ -72,10 +72,10 @@ contract Campaign {
 
     require(approvers[msg.sender]);
     //statment is changed to false, whereby if user has voted, it will be unable to.
-    require(!request[index].approvals[msg.sender]);
+    require(!request.approvals[msg.sender]);
 
-    request[index].approvals[msg.sender] = true;
-    request[index].approvalCount++;
+    request.approvals[msg.sender] = true;
+    request.approvalCount++;
   }
 
   function finalizeRequest(uint index) public restricted {
