@@ -3,8 +3,8 @@ const Web3 = require('web3');
 const compiledFactory = require('./build/CampaignFactory.json');
 
 const provider = new HDWalletProvider(
-  'call glow acoustic vintage front ring trade assist shuffle mimic volume reject',
-  'https://rinkeby.infura.io/orDImgKRzwNrVCDrAk5Q'
+  'target inquiry field dynamic dizzy another olive buddy tattoo analyst clutch donor',
+  'https://rinkeby.infura.io/v3/152a8729cd3f47dbb8402c3ad9d2cf5a'
 );
 const web3 =  new Web3(provider);
 
@@ -16,10 +16,9 @@ const deploy = async () => {
   const result = await new web3.eth.Contract(
     JSON.parse(compiledFactory.interface)
   )
-    .deploy({ data: compiledFactory.bytecode })
+    .deploy({ data: '0x' + compiledFactory.bytecode })
     .send({ gas: '1000000', from: accounts[0]});
 
     console.log('Contract deployed to', result.options.address);
   };
   deploy();
-}
